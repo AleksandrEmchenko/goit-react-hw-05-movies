@@ -1,0 +1,16 @@
+.header{
+    border-bottom: 2px solid black;
+    padding: 5px;
+}
+
+.link{
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: blue;
+    background-color: lightgrey;
+}
