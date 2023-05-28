@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
-import {Link, useLocation} from "react-router-dom"
+import { Link, useLocation } from "react-router-dom";
 
 import search from "components/services/API_searchByTrend";
-import css from "./Home.module.css"
+import css from "./Home.module.css";
 
 function Home() {
   const [movies, setMovies] = useState([]);
-  const location = useLocation()
-
+  const location = useLocation();
 
   const fetchFilmsTrending = async () => {
     try {
       const films = await search();
       setMovies(films);
-     
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +19,6 @@ function Home() {
 
   useEffect(() => {
     fetchFilmsTrending();
-    
   }, []);
 
   return (
@@ -30,10 +27,17 @@ function Home() {
       <ul className={css.movieContainer}>
         {movies &&
           movies.map((movie) => {
-            return <li className={css.link} key={movie.id}>
-              <Link to={`movies/${movie.id}`} state={{from: location}}>
-                <img src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path
-}`} width="200" alt={movie?.title}/> </Link></li>;
+            return (
+              <li className={css.link} key={movie.id}>
+                <Link to={`movies/${movie.id}`} state={{ from: location }}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
+                    width="200"
+                    alt={movie?.title}
+                  />{" "}
+                </Link>
+              </li>
+            );
           })}
       </ul>
     </div>

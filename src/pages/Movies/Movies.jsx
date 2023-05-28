@@ -2,21 +2,22 @@ import { Outlet, useSearchParams, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import searchMovie from "components/services/API_searchMovie";
-// import MovieDetails from "components/MovieDetails/MovieDetails";
+import css from "pages/Movies/Movies.module.css";
 
 function Movies() {
   const [searchParams, setSearchParams] = useSearchParams("");
   const searchword = searchParams.get("searchword");
-  const [movieSearch, setMovieSearch] = useState();
-  const location = useLocation()
+  const [movieSearch, setMovieSearch] = useState(null);
+  const location = useLocation();
 
   const searchMovieFunc = async (searchword) => {
-    try {
-      const results = await searchMovie(searchword);
-      setMovieSearch(results);
-
-    } catch (error) {
-      console.log(error);
+    if (searchword) {
+      try {
+        const results = await searchMovie(searchword);
+        setMovieSearch(results);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -37,17 +38,37 @@ function Movies() {
         }
       />
 
+      <ul className={css.movieContainer}>
+        {movieSearch && movieSearch.length !== 0 ? (
+          movieSearch.map((mov) => (
+            <li key={mov.id}>
+              <Link to={`${mov.id}`} from={{ from: location }}>
+                <div className={css.boxmov}>
+                  <div>
+                    {mov?.poster_path ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500/${mov?.poster_path}`}
+                        width="200"
+                        alt={mov?.title}
+                      />
+                    ) : (
+                      <img
+                        src="././src/Image/noImage.jpg"
+                        width="200"
+                        alt="No poster"
+                      />
+                    )}
+                  </div>
 
-<ul>
-{movieSearch && movieSearch.length !== 0 ?
-  movieSearch.map((mov) => (
-    <li key={mov.id}>
-      <Link to={`movies/${mov.id}`} from={{from: location}}>
-      {mov.title}
-      </Link>
-    </li>
-  )) : (<p>No results</p>)}
-</ul>
+                  <div>{mov.title}</div>
+                </div>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <p>No results</p>
+        )}
+      </ul>
       <Outlet />
     </div>
   );

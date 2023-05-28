@@ -17,7 +17,7 @@ async function searchMovie(searchword) {
     },
   };
 
-  const  response = await axios.request(options);
+  const response = await axios.request(options);
   return response.data.results;
 }
 

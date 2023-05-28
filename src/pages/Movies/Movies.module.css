@@ -1,0 +1,28 @@
+.trendingTitle {
+  text-align: center;
+}
+
+.movieContainer {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 10px;
+}
+
+.boxmov {
+  display: flex;
+  width: 200px;
+  height: 350px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  text-align: center;
+}
+
+.boxmov img {
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+}

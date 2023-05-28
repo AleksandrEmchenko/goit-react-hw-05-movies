@@ -1,6 +1,5 @@
 import { Outlet, useParams, Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, Suspense } from "react";
 
 import css from "./MovieDetails.module.css";
 
@@ -8,7 +7,7 @@ import searchId from "components/services/API_searchById";
 
 function MovieDetails() {
   const [mov, setMov] = useState();
-const location = useLocation()
+  const location = useLocation();
   const { id } = useParams();
 
   const fetchFilmById = async (id) => {
@@ -16,8 +15,6 @@ const location = useLocation()
       const film = await searchId(id);
 
       setMov(film);
-
-
     } catch (error) {
       console.log(error);
     }
@@ -26,10 +23,12 @@ const location = useLocation()
   useEffect(() => {
     fetchFilmById(id);
   }, [id]);
- 
+
   return (
-    <>
-    <Link to={location.state?.from ?? '/'} className={css.goBack}>&#9754;Go Back</Link>
+    <div>
+      <Link to={location.state?.from ?? "/"} className={css.goBack}>
+        &#9754;Go Back
+      </Link>
       <div className={css.container}>
         <img
           src={
@@ -55,7 +54,7 @@ const location = useLocation()
           </p>
         </div>
       </div>
-      
+
       <div className={css.AdInform}>
         <p>Aditional information</p>
         <ul>
@@ -67,8 +66,10 @@ const location = useLocation()
           </li>
         </ul>
       </div>
-      <Outlet />
-    </>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
+    </div>
   );
 }
 

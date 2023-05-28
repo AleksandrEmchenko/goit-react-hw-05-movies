@@ -1,12 +1,11 @@
-.author{
-    font-weight: 700;
+.author {
+  font-weight: 700;
 }
 
-.content{
-    border-left: 2px solid grey;
-    /* border-right: 2px solid grey; */
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 15px;
-    
+.content {
+  border-left: 2px solid grey;
+  /* border-right: 2px solid grey; */
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 15px;
 }
