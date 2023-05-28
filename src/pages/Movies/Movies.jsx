@@ -1,4 +1,4 @@
-import { Outlet, useSearchParams, Link } from "react-router-dom";
+import { Outlet, useSearchParams, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import searchMovie from "components/services/API_searchMovie";
@@ -8,14 +8,13 @@ function Movies() {
   const [searchParams, setSearchParams] = useSearchParams("");
   const searchword = searchParams.get("searchword");
   const [movieSearch, setMovieSearch] = useState();
+  const location = useLocation()
 
-  const searchMovieFunc = async (event) => {
+  const searchMovieFunc = async (searchword) => {
     try {
       const results = await searchMovie(searchword);
       setMovieSearch(results);
 
-      console.log("Поиск по слову===> ", movieSearch);
-      console.log("Длинна массива===> ", movieSearch?.length);
     } catch (error) {
       console.log(error);
     }
@@ -37,15 +36,18 @@ function Movies() {
           setSearchParams({ searchword: event.target.value })
         }
       />
-      <ul>
-        {movieSearch?.length !== 0 ? (
-          movieSearch?.map((movie) => {
-            <li>{movie.title}</li>;
-          })
-        ) : (
-          <p>No results</p>
-        )}
-      </ul>
+
+
+<ul>
+{movieSearch && movieSearch.length !== 0 ?
+  movieSearch.map((mov) => (
+    <li key={mov.id}>
+      <Link to={`movies/${mov.id}`} from={{from: location}}>
+      {mov.title}
+      </Link>
+    </li>
+  )) : (<p>No results</p>)}
+</ul>
       <Outlet />
     </div>
   );

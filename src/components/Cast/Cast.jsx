@@ -6,6 +6,7 @@ import css from "./Cast.module.css"
 function Cast() {
   const [casts, setCasts] = useState();
   const { id } = useParams();
+  
 
 
   const castsFunc = async (id) => {
