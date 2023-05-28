@@ -53,7 +53,7 @@ function Movies() {
                       />
                     ) : (
                       <img
-                        src="../../src/Image/noImage.jpg"
+                        src="https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg"
                         width="200"
                         alt="No poster"
                       />
