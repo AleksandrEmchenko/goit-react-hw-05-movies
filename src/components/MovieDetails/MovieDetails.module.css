@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  padding: 10px 5px;
+  border-bottom: 2px solid grey;
+}
+
+img {
+  margin-right: 20px;
+}
+
+.genres:not(last-child) {
+  margin-right: 10px;
+}
+
+.AdInform {
+  border-bottom: 1px solid grey;
+  padding-left: 5px;
+}
+
+.AdInform p{
+    font-weight: 700;
+}
+
+.AdInform ul {
+  list-style: none;
+}
+
+.AdInform ul li {
+  display: inline-block;
+  padding: 5px 10px;
+}
+.AdInform ul li:not(:last-child) {
+  border-right: 1px solid grey;
+}
+
+.goBack {
+  margin-top: 10px;
+  margin-left: 5px;
+  padding: 5px;
+  border: 1px solid #000000;
+  background-color: lightgray;
+  border-radius: 5px;
+  text-decoration: none;
+}

@@ -1,3 +1,19 @@
+.trendingTitle{
+    text-align: center;
+}
+
+.movieContainer{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 5px
+}
+
 .link{
     text-decoration: none;
 }
+
+.link img:hover{
+    outline: 3px solid red;
+    border-radius: 10px;
+        }

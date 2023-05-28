@@ -6,8 +6,8 @@ function Layaut() {
     <div>
       <header className={css.header}>
         <nav>
-          <NavLink to="/" className={css.link}>Home</NavLink>
-          <NavLink to="/movies"className={css.link}>Movies</NavLink>
+          <NavLink to="/" className={css.link} >Home</NavLink>
+          <NavLink to="/movies"className={css.link} >Movies</NavLink>
         </nav>
       </header>
       <main>

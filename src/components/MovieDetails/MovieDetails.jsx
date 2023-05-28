@@ -1,20 +1,23 @@
-import { useParams } from "react-router-dom";
+import { Outlet, useParams, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+
+
+import css from "./MovieDetails.module.css";
 
 import searchId from "components/services/API_searchById";
 
 function MovieDetails() {
-  const [movie, setMovie] = useState();
+  const [mov, setMov] = useState();
+const location = useLocation()
   const { id } = useParams();
 
   const fetchFilmById = async (id) => {
     try {
       const film = await searchId(id);
-      setMovie(film);
 
-      console.log("фільм=", film);
-        console.log("муви = ",movie)
+      setMov(film);
+
+
     } catch (error) {
       console.log(error);
     }
@@ -22,25 +25,50 @@ function MovieDetails() {
 
   useEffect(() => {
     fetchFilmById(id);
-  }, []);
-console.log("Муви вне фенкции=", movie)
+  }, [id]);
+ 
   return (
-    <div>
-      <div>
-        <img src="" alt={movie.title} />
+    <>
+    <Link to={location.state?.from ?? '/'} className={css.goBack}>&#9754;Go Back</Link>
+      <div className={css.container}>
+        <img
+          src={
+            mov?.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${mov.poster_path}`
+              : "noPhoto"
+          }
+          alt={mov?.title}
+          width="250"
+        />
+        <div className="movi-details">
+          <h1>{mov?.title}</h1>
+
+          <p>User Score: {(mov?.vote_average * 10).toFixed(1)}%</p>
+
+          <b>Overview</b>
+          <p>{mov?.overview}</p>
+          <b>Genres</b>
+          <p>
+            {mov?.genres.map((genre) => {
+              return <span className={css.genres}>{genre.name}</span>;
+            })}
+          </p>
+        </div>
       </div>
-      <div>
-        <h2>{movie.title}</h2>
-        <span>User Score: %</span>
-
-        <b>Overview</b>
-        <p>{movie.overview}</p>
-
-        <b>Genres</b>
-        <p>{movie.genres}</p>
+      
+      <div className={css.AdInform}>
+        <p>Aditional information</p>
+        <ul>
+          <li>
+            <Link to={"cast"}>Cast</Link>
+          </li>
+          <li>
+            <Link to={"reviews"}>Reviews</Link>
+          </li>
+        </ul>
       </div>
       <Outlet />
-    </div>
+    </>
   );
 }
 

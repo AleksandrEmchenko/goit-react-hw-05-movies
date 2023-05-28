@@ -1,6 +1,7 @@
 .header{
     border-bottom: 2px solid black;
     padding: 5px;
+    margin-bottom: 20px;
 }
 
 .link{
@@ -13,4 +14,10 @@
     margin-right: 5px;
     color: blue;
     background-color: lightgrey;
+
+    &[aria-current="page"]{
+        background-color: orange;
+        color: #000000; 
+        font-weight: 700;
+    }
 }
