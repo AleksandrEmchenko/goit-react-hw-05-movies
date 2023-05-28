@@ -53,7 +53,7 @@ function Movies() {
                       />
                     ) : (
                       <img
-                        src="././src/Image/noImage.jpg"
+                        src="./../src/Image/noImage.jpg"
                         width="200"
                         alt="No poster"
                       />
