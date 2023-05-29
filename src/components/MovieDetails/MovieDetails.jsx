@@ -21,6 +21,7 @@ function MovieDetails() {
   };
 
   useEffect(() => {
+    if(!id) return;
     fetchFilmById(id);
   }, [id]);
 

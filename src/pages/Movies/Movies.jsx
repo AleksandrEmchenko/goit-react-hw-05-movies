@@ -22,6 +22,7 @@ function Movies() {
   };
 
   useEffect(() => {
+    if(!searchword) return;
     searchMovieFunc(searchword);
   }, [searchword]);
 
